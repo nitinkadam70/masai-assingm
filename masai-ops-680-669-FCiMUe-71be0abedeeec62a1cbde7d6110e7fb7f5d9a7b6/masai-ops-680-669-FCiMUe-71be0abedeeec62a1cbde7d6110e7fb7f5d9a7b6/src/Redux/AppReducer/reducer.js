@@ -41,6 +41,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isAuth: true,
+        userData: action.payload,
       };
     default:
       return state;

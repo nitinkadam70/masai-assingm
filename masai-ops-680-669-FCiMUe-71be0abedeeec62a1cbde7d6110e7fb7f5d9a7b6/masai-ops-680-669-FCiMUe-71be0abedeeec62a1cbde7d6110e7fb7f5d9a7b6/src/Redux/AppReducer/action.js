@@ -71,7 +71,7 @@ export const AuthCheck = (payload) => (dispatch) => {
         alert('Wrong Credentials');
       } else {
         alert('Login Successfully');
-        dispatch(getAuthSuccess());
+        dispatch(getAuthSuccess(check));
         window.location.href = '/home';
       }
     })
