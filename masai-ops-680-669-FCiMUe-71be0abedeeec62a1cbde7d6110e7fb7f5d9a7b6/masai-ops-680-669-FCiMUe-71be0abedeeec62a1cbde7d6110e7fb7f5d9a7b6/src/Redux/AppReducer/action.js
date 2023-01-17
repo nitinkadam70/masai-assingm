@@ -47,7 +47,6 @@ export const getMeetupData = () => (dispatch) => {
   })
     .then((res) => {
       dispatch(getMeetupsSuccess(res.data));
-      console.log(res.data);
     })
     .catch((err) => dispatch(getMeetupsError(err)));
 };

@@ -13,7 +13,7 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const handleShowMyEvents = () => {
-    if (false) {
+    if (isAuth) {
       navigate('/home');
     } else {
       navigate('/login');
