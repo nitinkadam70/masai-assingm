@@ -45,7 +45,7 @@ export default function Dashboard() {
       <div className="meetups_wrapper">
         {meetupsData &&
           meetupsData.map((elem) => (
-            <div className="mini-container">
+            <div key={elem.id} className="mini-container">
               <img
                 src={elem.image}
                 className="image"

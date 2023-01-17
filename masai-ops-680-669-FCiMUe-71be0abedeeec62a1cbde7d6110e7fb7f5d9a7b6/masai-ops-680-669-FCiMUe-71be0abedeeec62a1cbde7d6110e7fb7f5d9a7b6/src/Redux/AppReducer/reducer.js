@@ -1,4 +1,5 @@
 import {
+  GET_AUTH_SUCCESS,
   GET_MEETUPS_ERROR,
   GET_MEETUPS_LOADING,
   GET_MEETUPS_SUCCESS,
@@ -33,6 +34,13 @@ const reducer = (state = initialState, action) => {
         isLoading: false,
         meetupsData: [],
         errorText: action.payload,
+      };
+
+    case GET_AUTH_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isAuth: true,
       };
     default:
       return state;

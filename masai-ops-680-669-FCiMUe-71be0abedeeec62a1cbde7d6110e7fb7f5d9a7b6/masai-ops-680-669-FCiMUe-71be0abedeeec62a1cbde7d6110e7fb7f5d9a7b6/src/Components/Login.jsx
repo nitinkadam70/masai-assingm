@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AuthCheck } from '../Redux/AppReducer/action';
 
 export default function Login() {
   const [userData, setUserData] = useState({});
+  const dispatch = useDispatch();
 
   const hanndleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    const { className, value } = e.target;
+    setUserData({ ...userData, [className]: value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userData);
+    dispatch(AuthCheck(userData));
   };
 
   return (
