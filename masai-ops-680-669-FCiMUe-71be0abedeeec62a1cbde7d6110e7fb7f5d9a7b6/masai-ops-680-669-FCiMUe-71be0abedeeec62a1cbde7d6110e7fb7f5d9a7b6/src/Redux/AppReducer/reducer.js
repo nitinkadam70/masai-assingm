@@ -1,4 +1,8 @@
-import * as types from './actionType';
+import {
+  GET_MEETUPS_ERROR,
+  GET_MEETUPS_LOADING,
+  GET_MEETUPS_SUCCESS,
+} from './actionType';
 
 const initialState = {
   userData: {},
@@ -9,11 +13,30 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  switch (action.types) {
-    case types.GET_MEETUPS_LOADING:
-      {}
+  switch (action.type) {
+    case GET_MEETUPS_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case GET_MEETUPS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        meetupsData: action.payload,
+      };
+
+    case GET_MEETUPS_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        meetupsData: [],
+        errorText: action.payload,
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 export { reducer };

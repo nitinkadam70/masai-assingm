@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getMeetupData } from '../Redux/AppReducer/action';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const isAuth = false;
+
+  const { meetupsData, errorText, isLoading, isAuth } = useSelector(
+    (store) => store.AppReducer
+  );
+
+  const dispatch = useDispatch();
+
   const handleShowMyEvents = () => {
-    if (isAuth) {
+    if (false) {
       navigate('/home');
     } else {
       navigate('/login');
     }
   };
 
+  useEffect(() => {
+    dispatch(getMeetupData());
+  }, []);
+
   return (
     <div>
-      <div>
+      <div className="nav">
         <button onClick={handleShowMyEvents} className="my-events">
           {' '}
-          Show My Events{' '}
+          Show My Events
         </button>
         <div>
           <button onClick={() => navigate('/login')}>Login</button>
@@ -31,16 +43,22 @@ export default function Dashboard() {
       </div>
       <h2>Upcoming Events</h2>
       <div className="meetups_wrapper">
-        Map the below container against your meetup events data
-        <div>
-          <img className="image" alt="img" />
-          <h4 className="title"> </h4>
-          <div className="location"> </div>
-          <div className="date"> </div>
-          <div className="time"> </div>
-          <div className="theme"> </div>
-          <div className="description"> </div>
-        </div>
+        {meetupsData &&
+          meetupsData.map((elem) => (
+            <div className="mini-container">
+              <img
+                src={elem.image}
+                className="image"
+                alt={elem.title}
+              />
+              <h4 className="title">{elem.title} </h4>
+              <div className="location"> {elem.location}</div>
+              <div className="date"> {elem.date}</div>
+              <div className="time"> {elem.time}</div>
+              <div className="theme">{elem.theme} </div>
+              <div className="description">{elem.description}</div>
+            </div>
+          ))}
       </div>
     </div>
   );
