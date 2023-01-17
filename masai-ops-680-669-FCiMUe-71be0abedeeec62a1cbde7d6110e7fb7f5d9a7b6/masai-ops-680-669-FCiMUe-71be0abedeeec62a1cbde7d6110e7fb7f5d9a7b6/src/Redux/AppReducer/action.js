@@ -6,6 +6,7 @@ import {
   GET_MEETUPS_ERROR,
   GET_MEETUPS_LOADING,
   GET_MEETUPS_SUCCESS,
+  USER_REGISTER_SUCCESS,
 } from './actionType';
 
 //actions - Meetups data getting
@@ -36,6 +37,12 @@ const getAuthSuccess = (data) => ({
 const getAuthError = (err) => ({
   type: GET_AUTH_ERROR,
   payload: err,
+});
+
+//user register
+
+const userRegister = () => ({
+  type: USER_REGISTER_SUCCESS,
 });
 
 //getting Data
@@ -76,4 +83,18 @@ export const AuthCheck = (payload) => (dispatch) => {
       }
     })
     .catch((err) => dispatch(getAuthError('Wrong Credentials')));
+};
+
+//register
+export const userRegisterCall = (payload) => (dispatch) => {
+  axios({
+    url: 'http://localhost:8080/users',
+    method: 'POST',
+    data: payload,
+    headers: { 'Content-type': 'Application/json' },
+  })
+    .then((res) => {
+      dispatch(userRegister(res.data));
+    })
+    .catch((err) => console.log(err));
 };
